@@ -46,3 +46,9 @@ std::vector<std::string> Config::loadFile(std::string name) {
     // wordlist is loaded, just return it
     return words;
 }
+
+std::vector<std::string> Config::getScripts() {
+    return vector<string>{
+            "shell", "ssh", "test"
+    };
+}

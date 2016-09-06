@@ -7,11 +7,20 @@ using namespace std;
 Network::Network(int size) {
     vector<string> words = Config::get().getWords();
     uniform_int_distribution<unsigned long> dist(0, words.size());
+
+    vector<string> scripts = Config::get().getScripts();
+    uniform_int_distribution<unsigned long> dist2(0, scripts.size());
+
     default_random_engine engine;
+    string prev;
     for(int i = 0; i < size; i++) {
         string name = words[dist(engine)];
-        Computer *c = new Computer(name, "script");
+        Computer *c = new Computer(name, scripts[dist2(engine)]);
         addComputer(c);
+        if(prev.length() > 0) {
+            c->addConnection(computers[prev]);
+        }
+        prev = name;
     }
 }
 

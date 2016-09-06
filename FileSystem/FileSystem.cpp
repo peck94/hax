@@ -13,6 +13,7 @@ FileSystem::FileSystem(Computer* computer) {
     dir->addDirectory(new Directory("/etc"));
 
     dir->getDirs()["/etc"]->addFile("passwd", "");
+    dir->getDirs()["/etc"]->addFile("hosts", "");
 }
 
 std::string FileSystem::pwd() {

@@ -31,6 +31,7 @@ public:
     std::vector<std::string> getLastNames();
     std::vector<std::string> getUsernames();
     std::vector<std::string> getPasswords();
+    std::vector<std::string> getScripts();
 };
 
 

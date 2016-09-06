@@ -7,6 +7,7 @@ Computer::Computer(std::string name, std::string path) {
     this->name = name;
     this->path = path;
     this->fs = new FileSystem(this);
+    addConnection(this);
 }
 
 Computer::Computer(std::string name, std::string path, int numUsers) {
@@ -16,6 +17,7 @@ Computer::Computer(std::string name, std::string path, int numUsers) {
     for(int i = 0; i < numUsers; i++) {
         addUser(new User());
     }
+    addConnection(this);
 }
 
 string Computer::getName() {
@@ -135,3 +137,7 @@ std::map<std::string, User*> Computer::getUsers() {
     return users;
 }
 
+void Computer::addConnection(Computer* computer) {
+    string hosts = fs->getRoot()->getDirs()["/etc"]->getFiles()["hosts"];
+    fs->getRoot()->getDirs()["/etc"]->addFile("hosts", hosts + computer->getName() + "\n");
+}

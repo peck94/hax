@@ -42,6 +42,9 @@ function execute(line)
         io.write("Host: ")
         io.flush()
         local host = io.read()
+        if not Connect(host) then
+            print("Cannot connect to host.")
+        end
     elseif line == "run" then
         io.write("program: ")
         io.flush()

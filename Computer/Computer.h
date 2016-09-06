@@ -75,6 +75,11 @@ public:
     void addUser(User* user);
 
     /**
+     * Add a network connection.
+     */
+    void addConnection(Computer* computer);
+
+    /**
      * Other functions, to be used by scripts.
      */
     bool ping(std::string name);
