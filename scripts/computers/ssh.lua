@@ -8,10 +8,9 @@ function checkAccess()
     io.flush()
     local password = io.read()
 
-    if not HasUser(name) then
+    if not GetUser(name) then
         return false
     end
 
-    GetUser(name)
     return User.getUserName() == name and User.getPassword() == password
 end

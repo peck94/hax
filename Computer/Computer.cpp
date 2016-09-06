@@ -36,14 +36,18 @@ void Computer::initialize() {
     state["Connect"] = [this](string name) { return connect(name); };
     state["RPC"] = [this](string name, string command) { return rpc(name, command); };
     state["GetUser"] = [this](string name) {
-        state["User"].SetObj(*users[name],
-                             "getUserName", &User::getUserName,
-                             "getFirstName", &User::getFirstName,
-                             "getLastName", &User::getLastName,
-                             "getPassword", &User::getPassword
-        );
+        if(users.find(name) != users.end()) {
+            state["User"].SetObj(*users[name],
+                                 "getUserName", &User::getUserName,
+                                 "getFirstName", &User::getFirstName,
+                                 "getLastName", &User::getLastName,
+                                 "getPassword", &User::getPassword
+            );
+            return true;
+        }else{
+            return false;
+        }
     };
-    state["HasUser"] = [this](string name) { return users.find(name) != users.end(); };
 
     // execute script
     state["main"]();
