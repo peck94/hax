@@ -21,7 +21,7 @@ private:
     /*
      * Lua state for the computer's script.
      */
-    sel::State* state;
+    sel::State state{true};
 
 public:
     /**

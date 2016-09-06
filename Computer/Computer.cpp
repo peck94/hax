@@ -19,10 +19,15 @@ void Computer::initialize() {
     // construct path of script file
     string path = "scripts/computers/" + getPath() + ".lua";
 
-    // initialize state
-    state = new State(true);
-
     // load script
-    state->Load(path);
+    state.Load(path);
+
+    // register class
+    state["computer"].SetObj(*this,
+                             "getName", &Computer::getName
+    );
+
+    // execute script
+    state["main"]();
 }
 
