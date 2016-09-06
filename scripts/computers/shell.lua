@@ -16,6 +16,8 @@ function execute(line)
         print("help: this text")
         print("logout: disconnect from this system")
         print("info: display information about this system")
+        print("ping: check whether a host is live")
+        print("connect: connect to a remote host")
     elseif line == "info" then info()
     elseif line == "ping" then
         io.write("host: ")
@@ -25,6 +27,13 @@ function execute(line)
             print("Host is alive.")
         else
             print("Host is not responding.")
+        end
+    elseif line == "connect" then
+        io.write("host: ")
+        io.flush()
+        local host = io.read()
+        if not Connect(host) then
+            print("Cannot connect to remote host.")
         end
     else
         print("Command not found: " .. line)

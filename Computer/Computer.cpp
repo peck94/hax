@@ -26,6 +26,7 @@ void Computer::initialize() {
     // register functions
     state["GetName"] = [this]() { return this->getName(); };
     state["Ping"] = [this](string name) { return this->ping(name); };
+    state["Connect"] = [this](string name) { return this->connect(name); };
 
     // execute script
     state["main"]();
@@ -41,5 +42,14 @@ Network *Computer::getNetwork() {
 
 bool Computer::ping(std::string name) {
     return network->getComputers().find(name) != network->getComputers().end();
+}
+
+bool Computer::connect(std::string name) {
+    if(ping(name)) {
+        network->getComputers()[name]->initialize();
+        return true;
+    }else{
+        return false;
+    }
 }
 

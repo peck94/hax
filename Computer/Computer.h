@@ -58,6 +58,7 @@ public:
      * Other functions, to be used by scripts.
      */
     bool ping(std::string name);
+    bool connect(std::string name);
 };
 
 
