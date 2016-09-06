@@ -1,10 +1,9 @@
 function main()
     info()
     repeat
-        local line
         io.write("$ ")
         io.flush()
-        line = io.read()
+        local line = io.read()
 
         execute(line)
     until line == "logout"
@@ -18,11 +17,20 @@ function execute(line)
         print("logout: disconnect from this system")
         print("info: display information about this system")
     elseif line == "info" then info()
+    elseif line == "ping" then
+        io.write("host: ")
+        io.flush()
+        local host = io.read()
+        if Ping(host) == true then
+            print("Host is alive.")
+        else
+            print("Host is not responding.")
+        end
     else
         print("Command not found: " .. line)
     end
 end
 
 function info()
-    print("Connected to " .. computer.getName())
+    print("Connected to " .. GetName())
 end

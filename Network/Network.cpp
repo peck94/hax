@@ -28,5 +28,6 @@ std::map<std::string, Computer*> Network::getComputers() {
 
 void Network::addComputer(Computer *c) {
     computers[c->getName()] = c;
+    c->setNetwork(this);
 }
 

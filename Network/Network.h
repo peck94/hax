@@ -4,6 +4,8 @@
 #include <map>
 #include "../Computer/Computer.h"
 
+class Computer;
+
 class Network {
 private:
     /*

@@ -1,4 +1,5 @@
 #include "Computer.h"
+#include <functional>
 using namespace sel;
 using namespace std;
 
@@ -22,12 +23,23 @@ void Computer::initialize() {
     // load script
     state.Load(path);
 
-    // register class
-    state["computer"].SetObj(*this,
-                             "getName", &Computer::getName
-    );
+    // register functions
+    state["GetName"] = [this]() { return this->getName(); };
+    state["Ping"] = [this](string name) { return this->ping(name); };
 
     // execute script
     state["main"]();
+}
+
+void Computer::setNetwork(Network *network) {
+    this->network = network;
+}
+
+Network *Computer::getNetwork() {
+    return network;
+}
+
+bool Computer::ping(std::string name) {
+    return network->getComputers().find(name) != network->getComputers().end();
 }
 
