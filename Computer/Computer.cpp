@@ -126,6 +126,9 @@ Computer::~Computer() {
 void Computer::addUser(User *user) {
     users[user->getUserName()] = user;
     fs->getRoot()->getDirs()["/home"]->addDirectory(new Directory(user->getUserName()));
+
+    string passwd = fs->getRoot()->getDirs()["/etc"]->getFiles()["passwd"];
+    fs->getRoot()->getDirs()["/etc"]->addFile("passwd", passwd + user->getUserName() + ":x:/home/" + user->getUserName() + ":/bin/sh\n");
 }
 
 std::map<std::string, User*> Computer::getUsers() {

@@ -60,6 +60,11 @@ function execute(line)
         if not FileSystem.cd(target) then
             print("Directory not found: " .. target)
         end
+    elseif line == "cat" then
+        io.write("File: ")
+        io.flush()
+        local target = io.read()
+        print(FileSystem.cat(target))
     else
         print("Command not found: " .. line)
     end

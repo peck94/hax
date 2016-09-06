@@ -22,7 +22,7 @@ private:
     /*
      * List of files in this directory.
      */
-    std::vector<std::string> files;
+    std::map<std::string, std::string> files;
 
     /*
      * List of directories in this directory.
@@ -38,16 +38,17 @@ public:
      * Getters.
      */
     std::string getName();
+    std::map<std::string, std::string> getFiles();
 
     /**
      * Commands.
      */
     void addDirectory(Directory* dir);
-    void addFile(std::string name);
+    void addFile(std::string name, std::string contents);
     void setParent(Directory* dir);
     std::map<std::string, Directory*> getDirs();
 
-    /**state(line.c_str());
+    /**
      * Directory dtor.
      * Destroys all subdirs.
      */
@@ -83,7 +84,7 @@ public:
     std::string pwd();
     bool cd(std::string name);
     void ls();
-    void cat(std::string name);
+    std::string cat(std::string name);
 
     /**
      * Getters.

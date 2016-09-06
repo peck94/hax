@@ -11,6 +11,8 @@ FileSystem::FileSystem(Computer* computer) {
     dir->addDirectory(new Directory("/var"));
     dir->addDirectory(new Directory("/bin"));
     dir->addDirectory(new Directory("/etc"));
+
+    dir->getDirs()["/etc"]->addFile("passwd", "");
 }
 
 std::string FileSystem::pwd() {
@@ -30,10 +32,17 @@ void FileSystem::ls() {
     for(auto p: dir->getDirs()) {
         computer->run("print(\"" + p.first + "\")");
     }
+    for(auto p: dir->getFiles()) {
+        computer->run("print(\"" + p.first + "\")");
+    }
 }
 
-void FileSystem::cat(std::string name) {
-    // TODO
+std::string FileSystem::cat(std::string name) {
+    if(dir->getFiles().find(name) == dir->getFiles().end()) {
+        return "";
+    }else{
+        return dir->getFiles()[name];
+    }
 }
 
 FileSystem::~FileSystem() {
@@ -62,8 +71,8 @@ Directory::~Directory() {
     }
 }
 
-void Directory::addFile(std::string name) {
-    files.push_back(name);
+void Directory::addFile(std::string name, std::string contents) {
+    files[name] = contents;
 }
 
 void Directory::addDirectory(Directory *dir) {
@@ -77,4 +86,8 @@ void Directory::setParent(Directory *dir) {
 
 std::map<std::string, Directory *> Directory::getDirs() {
     return dirs;
+}
+
+std::map<std::string, std::string> Directory::getFiles() {
+    return files;
 }
