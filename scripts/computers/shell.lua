@@ -2,7 +2,7 @@ function main()
     info()
     if checkAccess() then
         repeat
-            io.write(GetName() .. ":" .. FileSystem.pwd() .. "$ ")
+            io.write(User.getUserName() .. "@" .. GetName() .. ":" .. FileSystem.pwd() .. "$ ")
             io.flush()
             local line = io.read()
 
