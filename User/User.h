@@ -20,9 +20,17 @@ public:
     User();
 
     /**
+     * Initialize user with specified data.
+     */
+    User(std::string firstname, std::string lastname, std::string username, std::string password);
+
+    /**
      * Standard getters.
      */
-    std::string getName();
+    std::string getUserName();
+    std::string getFirstName();
+    std::string getLastName();
+    std::string getPassword();
 };
 
 

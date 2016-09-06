@@ -8,6 +8,7 @@ int main() {
 
     // initialize localhost
     Computer* localhost = new Computer("localhost", "ssh");
+    localhost->addUser(new User("Jonathan", "Peck", "jpeck", "phoenix"));
     network->addComputer(localhost);
 
     // connect to localhost

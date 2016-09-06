@@ -20,6 +20,26 @@ User::User() {
     password = passwords[dist4(engine)];
 }
 
-std::string User::getName() {
+User::User(std::string firstname, std::string lastname, std::string username, std::string password) {
+    this->firstname = firstname;
+    this->lastname = lastname;
+    this->username = username;
+    this->password = password;
+}
+
+std::string User::getUserName() {
     return username;
 }
+
+std::string User::getFirstName() {
+    return firstname;
+}
+
+std::string User::getLastName() {
+    return lastname;
+}
+
+std::string User::getPassword() {
+    return password;
+}
+

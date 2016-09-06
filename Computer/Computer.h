@@ -38,9 +38,10 @@ private:
 
 public:
     /**
-     * Computer ctor.
+     * Computer ctors.
      */
     Computer(std::string name, std::string path);
+    Computer(std::string name, std::string path, int numUsers);
 
     /**
      * Standard getters.

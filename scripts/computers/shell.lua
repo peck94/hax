@@ -42,6 +42,8 @@ function execute(line)
         io.write("host: ")
         io.flush()
         local host = io.read()
+    elseif line == "finger" then
+        print(ListUsers())
         if not Connect(host) then
             print("Cannot connect to remote host.")
         end

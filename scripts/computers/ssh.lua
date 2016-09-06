@@ -1,8 +1,5 @@
 require "scripts/computers/shell"
 
-user = "admin"
-pass = "god"
-
 function checkAccess()
     io.write("Username: ")
     io.flush()
@@ -11,5 +8,10 @@ function checkAccess()
     io.flush()
     local password = io.read()
 
-    return name == user and password == pass
+    if not HasUser(name) then
+        return false
+    end
+
+    GetUser(name)
+    return User.getUserName() == name and User.getPassword() == password
 end

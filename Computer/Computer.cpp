@@ -5,7 +5,14 @@ using namespace std;
 Computer::Computer(std::string name, std::string path) {
     this->name = name;
     this->path = path;
-    addUser(new User());
+}
+
+Computer::Computer(std::string name, std::string path, int numUsers) {
+    this->name = name;
+    this->path = path;
+    for(int i = 0; i < numUsers; i++) {
+        addUser(new User());
+    }
 }
 
 string Computer::getName() {
@@ -28,7 +35,15 @@ void Computer::initialize() {
     state["Ping"] = [this](string name) { return ping(name); };
     state["Connect"] = [this](string name) { return connect(name); };
     state["RPC"] = [this](string name, string command) { return rpc(name, command); };
-    state["GetUser"] = [this](string name) { return users[name]; };
+    state["GetUser"] = [this](string name) {
+        state["User"].SetObj(*users[name],
+                             "getUserName", &User::getUserName,
+                             "getFirstName", &User::getFirstName,
+                             "getLastName", &User::getLastName,
+                             "getPassword", &User::getPassword
+        );
+    };
+    state["HasUser"] = [this](string name) { return users.find(name) != users.end(); };
 
     // execute script
     state["main"]();
@@ -75,7 +90,7 @@ Computer::~Computer() {
 }
 
 void Computer::addUser(User *user) {
-    users[user->getName()] = user;
+    users[user->getUserName()] = user;
 }
 
 std::map<std::string, User*> Computer::getUsers() {
