@@ -8,10 +8,10 @@ User::User() {
     vector<string> lastnames = Config::get().getLastNames();
     vector<string> usernames = Config::get().getUsernames();
     vector<string> passwords = Config::get().getPasswords();
-    uniform_int_distribution<unsigned long> dist1(0, firstnames.size());
-    uniform_int_distribution<unsigned long> dist2(0, lastnames.size());
-    uniform_int_distribution<unsigned long> dist3(0, usernames.size());
-    uniform_int_distribution<unsigned long> dist4(0, passwords.size());
+    uniform_int_distribution<unsigned long> dist1(0, firstnames.size()-1);
+    uniform_int_distribution<unsigned long> dist2(0, lastnames.size()-1);
+    uniform_int_distribution<unsigned long> dist3(0, usernames.size()-1);
+    uniform_int_distribution<unsigned long> dist4(0, passwords.size()-1);
     default_random_engine engine;
 
     firstname = firstnames[dist1(engine)];
