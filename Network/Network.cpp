@@ -12,7 +12,7 @@ Network::Network(int size) {
 
     uniform_int_distribution<int> dist3(0, Config::get().getMaxUsers());
 
-    default_random_engine engine;
+    mt19937_64 engine = Config::get().getEngine();
     string prev;
     for(int i = 0; i < size; i++) {
         string name;

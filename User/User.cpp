@@ -12,7 +12,7 @@ User::User() {
     uniform_int_distribution<unsigned long> dist2(0, lastnames.size()-1);
     uniform_int_distribution<unsigned long> dist3(0, usernames.size()-1);
     uniform_int_distribution<unsigned long> dist4(0, passwords.size()-1);
-    default_random_engine engine;
+    mt19937_64 engine = Config::get().getEngine();
 
     firstname = firstnames[dist1(engine)];
     lastname = lastnames[dist2(engine)];

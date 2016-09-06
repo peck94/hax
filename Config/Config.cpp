@@ -56,3 +56,8 @@ std::vector<std::string> Config::getScripts() {
 int Config::getMaxUsers() {
     return 10;
 }
+
+mt19937_64 Config::getEngine() {
+    random_device r;
+    return mt19937_64(r());
+}

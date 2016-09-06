@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <random>
 
 class Config {
 private:
@@ -14,6 +15,9 @@ private:
      */
     std::vector<std::string> words;
 
+    /**
+     * Lazily load a file.
+     */
     std::vector<std::string> loadFile(std::string name);
 
 public:
@@ -33,6 +37,7 @@ public:
     std::vector<std::string> getPasswords();
     std::vector<std::string> getScripts();
     int getMaxUsers();
+    std::mt19937_64 getEngine();
 };
 
 
