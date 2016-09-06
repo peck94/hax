@@ -3,6 +3,7 @@
 
 #include <string>
 #include "../Network/Network.h"
+#include "../User/User.h"
 #include "../includes/selene.h"
 
 class Network;
@@ -19,6 +20,11 @@ private:
      * Path to the computer's script file.
      */
     std::string path;
+
+    /*
+     * List of users that can login to this server.
+     */
+    std::vector<User*> users;
 
     /*
      * Lua state for the computer's script.
@@ -55,12 +61,23 @@ public:
     void initialize();
 
     /**
+     * Add a user to this computer.
+     */
+    void addUser(User* user);
+
+    /**
      * Other functions, to be used by scripts.
      */
     bool ping(std::string name);
     bool connect(std::string name);
     bool rpc(std::string name, std::string command);
     void run(std::string command);
+
+    /**
+     * Computer dtor.
+     * This deletes all users.
+     */
+    ~Computer();
 };
 
 

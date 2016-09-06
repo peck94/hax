@@ -66,3 +66,13 @@ void Computer::run(std::string command) {
     state(command.c_str());
 }
 
+Computer::~Computer() {
+    for(User* user: users) {
+        delete user;
+    }
+}
+
+void Computer::addUser(User *user) {
+    users.push_back(user);
+}
+
