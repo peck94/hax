@@ -10,6 +10,8 @@ Network::Network(int size) {
     vector<string> scripts = Config::get().getScripts();
     uniform_int_distribution<unsigned long> dist2(0, scripts.size()-1);
 
+    uniform_int_distribution<int> dist3(0, Config::get().getMaxUsers());
+
     default_random_engine engine;
     string prev;
     for(int i = 0; i < size; i++) {
@@ -20,6 +22,10 @@ Network::Network(int size) {
 
         string s = scripts[dist2(engine)];
         Computer *c = new Computer(name, s);
+        for(int j = 0; j < dist3(engine); j++) {
+            c->addUser(new User());
+        }
+
         addComputer(c);
         if(prev.length() > 0) {
             c->addConnection(computers[prev]);

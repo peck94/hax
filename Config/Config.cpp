@@ -52,3 +52,7 @@ std::vector<std::string> Config::getScripts() {
             "shell", "ssh"
     };
 }
+
+int Config::getMaxUsers() {
+    return 10;
+}
