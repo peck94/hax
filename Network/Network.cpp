@@ -1,24 +1,29 @@
 #include "Network.h"
 #include "../Config/Config.h"
-#include <vector>
 #include <random>
 using namespace std;
 
 Network::Network(int size) {
     vector<string> words = Config::get().getWords();
-    uniform_int_distribution<unsigned long> dist(0, words.size());
+    uniform_int_distribution<unsigned long> dist(0, words.size()-1);
 
     vector<string> scripts = Config::get().getScripts();
-    uniform_int_distribution<unsigned long> dist2(0, scripts.size());
+    uniform_int_distribution<unsigned long> dist2(0, scripts.size()-1);
 
     default_random_engine engine;
     string prev;
     for(int i = 0; i < size; i++) {
-        string name = words[dist(engine)];
-        Computer *c = new Computer(name, scripts[dist2(engine)]);
+        string name;
+        do {
+            name = words[dist(engine)];
+        }while(computers.find(name) != computers.end());
+
+        string s = scripts[dist2(engine)];
+        Computer *c = new Computer(name, s);
         addComputer(c);
         if(prev.length() > 0) {
             c->addConnection(computers[prev]);
+            computers[prev]->addConnection(c);
         }
         prev = name;
     }

@@ -1,2 +1,3 @@
-print("Hello, I am " + name)
-
+function main()
+    print("Hello, I am " + name)
+end
