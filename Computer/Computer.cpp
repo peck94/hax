@@ -8,6 +8,7 @@ Computer::Computer(std::string name, std::string path) {
     this->path = path;
     this->fs = new FileSystem(this);
     addConnection(this);
+    initialize();
 }
 
 Computer::Computer(std::string name, std::string path, int numUsers) {
@@ -18,6 +19,7 @@ Computer::Computer(std::string name, std::string path, int numUsers) {
         addUser(new User());
     }
     addConnection(this);
+    initialize();
 }
 
 string Computer::getName() {
@@ -79,7 +81,9 @@ void Computer::initialize() {
                                "pwd", &FileSystem::pwd,
                                "cat", &FileSystem::cat
     );
+}
 
+void Computer::main() {
     // execute script
     state["main"]();
 }
@@ -98,7 +102,7 @@ bool Computer::ping(std::string name) {
 
 bool Computer::connect(std::string name) {
     if(ping(name)) {
-        network->getComputers()[name]->initialize();
+        network->getComputers()[name]->main();
         return true;
     }else{
         return false;

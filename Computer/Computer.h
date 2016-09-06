@@ -43,6 +43,12 @@ private:
      */
     FileSystem* fs;
 
+    /**
+     * Initialize the computer.
+     * This function will load the script associated with this computer and initialize storage.
+     */
+    void initialize();
+
 public:
     /**
      * Computer ctors.
@@ -64,12 +70,6 @@ public:
     void setNetwork(Network* network);
 
     /**
-     * Initialize the computer.
-     * This function will load the script associated with this computer and initialize storage.
-     */
-    void initialize();
-
-    /**
      * Add a user to this computer.
      */
     void addUser(User* user);
@@ -86,6 +86,11 @@ public:
     bool connect(std::string name);
     bool rpc(std::string name, std::string command);
     void run(std::string command);
+
+    /**
+     * Run the main function of this computer.
+     */
+    void main();
 
     /**
      * Computer dtor.

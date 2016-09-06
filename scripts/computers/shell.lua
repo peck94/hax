@@ -11,8 +11,6 @@ function main()
     else
         print("Access denied.")
     end
-
-    print("Connection closed by remote host.")
 end
 
 function checkAccess()
@@ -44,6 +42,8 @@ function execute(line)
         local host = io.read()
         if not Connect(host) then
             print("Cannot connect to host.")
+        else
+            print("Connection closed by remote host.")
         end
     elseif line == "run" then
         io.write("program: ")

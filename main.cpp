@@ -19,7 +19,7 @@ int main() {
     network->addComputer(localhost);
 
     // connect to localhost
-    localhost->initialize();
+    localhost->main();
 
     // destroy network
     delete network;
