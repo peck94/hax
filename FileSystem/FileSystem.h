@@ -9,28 +9,6 @@
 #include <map>
 #include <vector>
 
-class FileSystem {
-private:
-    /*
-     * Current directory.
-     */
-    Directory* dir;
-
-public:
-    /**
-     * Initialize.
-     */
-    FileSystem();
-
-    /**
-     * Commands exposed to scripts.
-     */
-    std::string pwd();
-    bool cd(std::string name);
-    std::vector<std::string> ls();
-    std::string cat(std::string name);
-};
-
 class Directory {
 private:
     /*
@@ -72,6 +50,28 @@ public:
      * Destroys all subdirs.
      */
     ~Directory();
+};
+
+class FileSystem {
+private:
+    /*
+     * Current directory.
+     */
+    Directory* dir;
+
+public:
+    /**
+     * Initialize.
+     */
+    FileSystem();
+
+    /**
+     * Commands exposed to scripts.
+     */
+    std::string pwd();
+    bool cd(std::string name);
+    std::vector<std::string> ls();
+    std::string cat(std::string name);
 };
 
 
