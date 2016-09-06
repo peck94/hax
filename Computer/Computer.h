@@ -2,7 +2,12 @@
 #define HAX_COMPUTER_H
 
 #include <string>
-#include <lua.h>
+extern "C" {
+# include "lua.h"
+# include "lauxlib.h"
+# include "lualib.h"
+}
+
 
 class Computer {
 private:
