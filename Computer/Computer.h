@@ -2,11 +2,7 @@
 #define HAX_COMPUTER_H
 
 #include <string>
-extern "C" {
-# include "lua.h"
-# include "lauxlib.h"
-# include "lualib.h"
-}
+#include "../includes/selene.h"
 
 
 class Computer {
@@ -25,7 +21,7 @@ private:
     /*
      * Lua state for the computer's script.
      */
-    lua_State* luaState;
+    sel::State* state;
 
 public:
     /**
