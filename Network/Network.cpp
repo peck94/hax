@@ -23,7 +23,12 @@ Network::Network(int size) {
         string s = scripts[dist2(engine)];
         Computer *c = new Computer(name, s);
         for(int j = 0; j < dist3(engine); j++) {
-            c->addUser(new User());
+            User* user = new User();
+            if(c->getUsers().find(user->getUserName()) == c->getUsers().end()) {
+                c->addUser(user);
+            }else{
+                delete user;
+            }
         }
 
         addComputer(c);
