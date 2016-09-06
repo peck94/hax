@@ -1,5 +1,4 @@
 #include "Computer.h"
-#include <functional>
 using namespace sel;
 using namespace std;
 
@@ -24,9 +23,10 @@ void Computer::initialize() {
     state.Load(path);
 
     // register functions
-    state["GetName"] = [this]() { return this->getName(); };
-    state["Ping"] = [this](string name) { return this->ping(name); };
-    state["Connect"] = [this](string name) { return this->connect(name); };
+    state["GetName"] = [this]() { return getName(); };
+    state["Ping"] = [this](string name) { return ping(name); };
+    state["Connect"] = [this](string name) { return connect(name); };
+    state["RPC"] = [this](string name, string command) { return rpc(name, command); };
 
     // execute script
     state["main"]();
@@ -51,5 +51,18 @@ bool Computer::connect(std::string name) {
     }else{
         return false;
     }
+}
+
+bool Computer::rpc(std::string name, std::string command) {
+    if(ping(name)) {
+        network->getComputers()[name]->run(command);
+        return true;
+    }else{
+        return false;
+    }
+}
+
+void Computer::run(std::string command) {
+    state(command.c_str());
 }
 

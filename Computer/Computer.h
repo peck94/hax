@@ -59,6 +59,8 @@ public:
      */
     bool ping(std::string name);
     bool connect(std::string name);
+    bool rpc(std::string name, std::string command);
+    void run(std::string command);
 };
 
 
