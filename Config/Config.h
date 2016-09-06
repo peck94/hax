@@ -14,6 +14,8 @@ private:
      */
     std::vector<std::string> words;
 
+    std::vector<std::string> loadFile(std::string name);
+
 public:
     Config(Config const&)               = delete;
     void operator=(Config const&)       = delete;
@@ -25,6 +27,10 @@ public:
     }
 
     std::vector<std::string> getWords();
+    std::vector<std::string> getFirstNames();
+    std::vector<std::string> getLastNames();
+    std::vector<std::string> getUsernames();
+    std::vector<std::string> getPasswords();
 };
 
 

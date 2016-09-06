@@ -22,9 +22,9 @@ private:
     std::string path;
 
     /*
-     * List of users that can login to this server.
+     * Map of users that can login to this server.
      */
-    std::vector<User*> users;
+    std::map<std::string, User*> users;
 
     /*
      * Lua state for the computer's script.
@@ -48,6 +48,7 @@ public:
     std::string getName();
     std::string getPath();
     Network* getNetwork();
+    std::map<std::string, User*> getUsers();
 
     /**
      * Standard setters.

@@ -12,6 +12,17 @@ private:
     std::string lastname;
     std::string username;
     std::string password;
+
+public:
+    /**
+     * Initialize user with random data.
+     */
+    User();
+
+    /**
+     * Standard getters.
+     */
+    std::string getName();
 };
 
 

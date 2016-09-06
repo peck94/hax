@@ -5,6 +5,7 @@ using namespace std;
 Computer::Computer(std::string name, std::string path) {
     this->name = name;
     this->path = path;
+    addUser(new User());
 }
 
 string Computer::getName() {
@@ -27,6 +28,7 @@ void Computer::initialize() {
     state["Ping"] = [this](string name) { return ping(name); };
     state["Connect"] = [this](string name) { return connect(name); };
     state["RPC"] = [this](string name, string command) { return rpc(name, command); };
+    state["GetUser"] = [this](string name) { return users[name]; };
 
     // execute script
     state["main"]();
@@ -67,12 +69,16 @@ void Computer::run(std::string command) {
 }
 
 Computer::~Computer() {
-    for(User* user: users) {
-        delete user;
+    for(auto p: users) {
+        delete p.second;
     }
 }
 
 void Computer::addUser(User *user) {
-    users.push_back(user);
+    users[user->getName()] = user;
+}
+
+std::map<std::string, User*> Computer::getUsers() {
+    return users;
 }
 

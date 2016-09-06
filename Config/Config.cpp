@@ -7,11 +7,31 @@
 using namespace std;
 
 std::vector<std::string> Config::getWords() {
+    return loadFile("tech");
+}
+
+std::vector<std::string> Config::getFirstNames() {
+    return loadFile("iraniannames.txt");
+}
+
+std::vector<std::string> Config::getLastNames() {
+    return loadFile("arabicnames.txt");
+}
+
+std::vector<std::string> Config::getUsernames() {
+    return loadFile("usernames.txt");
+}
+
+std::vector<std::string> Config::getPasswords() {
+    return loadFile("passwords.txt");
+}
+
+std::vector<std::string> Config::loadFile(std::string name) {
     // load the wordlist if we haven't already
     if(words.empty()) {
-        ifstream file("data/tech", ios::in);
+        ifstream file("data/" + name, ios::in);
         if(!file.is_open()) {
-            throw runtime_error("Could not open wordlist");
+            throw runtime_error("Could not open wordlist: " + name);
         }
 
         while(!file.eof()) {
