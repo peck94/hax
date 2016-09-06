@@ -1,7 +1,9 @@
 #include "FileSystem.h"
 using namespace std;
+using namespace sel;
 
-FileSystem::FileSystem() {
+FileSystem::FileSystem(Computer* computer) {
+    this->computer = computer;
     root = new Directory("/");
     dir = root;
 
@@ -24,17 +26,14 @@ bool FileSystem::cd(std::string name) {
     }
 }
 
-std::vector<std::string> FileSystem::ls() {
-    vector<string> names;
+void FileSystem::ls() {
     for(auto p: dir->getDirs()) {
-        names.push_back(p.first);
+        computer->run("print(\"" + p.first + "\")");
     }
-
-    return names;
 }
 
-std::string FileSystem::cat(std::string name) {
-    return "lol";
+void FileSystem::cat(std::string name) {
+    // TODO
 }
 
 FileSystem::~FileSystem() {

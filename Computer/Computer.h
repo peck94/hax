@@ -8,6 +8,7 @@
 #include "../includes/selene.h"
 
 class Network;
+class FileSystem;
 
 class Computer {
 private:
@@ -41,11 +42,6 @@ private:
      * Local file system.
      */
     FileSystem* fs;
-
-    /*
-     * Initialize new Lua state.
-     */
-    void initState(sel::State state);
 
 public:
     /**

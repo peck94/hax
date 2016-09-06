@@ -6,13 +6,13 @@ using namespace std;
 Computer::Computer(std::string name, std::string path) {
     this->name = name;
     this->path = path;
-    this->fs = new FileSystem();
+    this->fs = new FileSystem(this);
 }
 
 Computer::Computer(std::string name, std::string path, int numUsers) {
     this->name = name;
     this->path = path;
-    this->fs = new FileSystem();
+    this->fs = new FileSystem(this);
     for(int i = 0; i < numUsers; i++) {
         addUser(new User());
     }

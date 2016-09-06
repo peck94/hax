@@ -8,6 +8,9 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "../Computer/Computer.h"
+
+class Computer;
 
 class Directory {
 private:
@@ -25,7 +28,6 @@ private:
      * List of directories in this directory.
      */
     std::map<std::string, Directory*> dirs;
-
 public:
     /**
      * Directory ctor.
@@ -45,7 +47,7 @@ public:
     void setParent(Directory* dir);
     std::map<std::string, Directory*> getDirs();
 
-    /**
+    /**state(line.c_str());
      * Directory dtor.
      * Destroys all subdirs.
      */
@@ -64,19 +66,28 @@ private:
      */
     Directory* root;
 
+    /*
+     * Computer that hosts this file system.
+     */
+    Computer* computer;
+
 public:
     /**
      * Initialize.
      */
-    FileSystem();
+    FileSystem(Computer* computer);
 
     /**
      * Commands exposed to scripts.
      */
     std::string pwd();
     bool cd(std::string name);
-    std::vector<std::string> ls();
-    std::string cat(std::string name);
+    void ls();
+    void cat(std::string name);
+
+    /**
+     * Getters.
+     */
     Directory* getRoot();
     Directory* getCurrent();
 
