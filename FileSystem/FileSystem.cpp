@@ -6,7 +6,13 @@
 using namespace std;
 
 FileSystem::FileSystem() {
+    root = new Directory("/");
+    dir = root;
 
+    dir->addDirectory(new Directory("/home"));
+    dir->addDirectory(new Directory("/var"));
+    dir->addDirectory(new Directory("/bin"));
+    dir->addDirectory(new Directory("/etc"));
 }
 
 std::string FileSystem::pwd() {
@@ -33,6 +39,18 @@ std::vector<std::string> FileSystem::ls() {
 
 std::string FileSystem::cat(std::string name) {
     return "lol";
+}
+
+FileSystem::~FileSystem() {
+    delete root;
+}
+
+Directory *FileSystem::getRoot() {
+    return root;
+}
+
+Directory *FileSystem::getCurrent() {
+    return dir;
 }
 
 std::string Directory::getName() {

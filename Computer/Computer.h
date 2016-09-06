@@ -4,6 +4,7 @@
 #include <string>
 #include "../Network/Network.h"
 #include "../User/User.h"
+#include "../FileSystem/FileSystem.h"
 #include "../includes/selene.h"
 
 class Network;
@@ -35,6 +36,11 @@ private:
      * Network connection.
      */
     Network* network;
+
+    /*
+     * Local file system.
+     */
+    FileSystem* fs;
 
 public:
     /**

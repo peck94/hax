@@ -5,11 +5,13 @@ using namespace std;
 Computer::Computer(std::string name, std::string path) {
     this->name = name;
     this->path = path;
+    this->fs = new FileSystem();
 }
 
 Computer::Computer(std::string name, std::string path, int numUsers) {
     this->name = name;
     this->path = path;
+    this->fs = new FileSystem();
     for(int i = 0; i < numUsers; i++) {
         addUser(new User());
     }
@@ -49,8 +51,18 @@ void Computer::initialize() {
         }
     };
     state["Run"] = [this](string name) {
-
+        State newState{true};
+        newState.Load(name.c_str());
     };
+
+    // register variables
+    state["FileSystem"].SetObj(*fs,
+                               "getRoot", &FileSystem::getRoot,
+                               "cd", &FileSystem::cd,
+                               "ls", &FileSystem::ls,
+                               "pwd", &FileSystem::pwd,
+                               "cat", &FileSystem::cat
+    );
 
     // execute script
     state["main"]();
@@ -91,6 +103,7 @@ void Computer::run(std::string command) {
 }
 
 Computer::~Computer() {
+    delete fs;
     for(auto p: users) {
         delete p.second;
     }
@@ -98,6 +111,7 @@ Computer::~Computer() {
 
 void Computer::addUser(User *user) {
     users[user->getUserName()] = user;
+    fs->getRoot()->getDirs()["/home"]->addDirectory(new Directory(user->getUserName()));
 }
 
 std::map<std::string, User*> Computer::getUsers() {

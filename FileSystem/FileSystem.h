@@ -59,6 +59,11 @@ private:
      */
     Directory* dir;
 
+    /*
+     * Root directory.
+     */
+    Directory* root;
+
 public:
     /**
      * Initialize.
@@ -72,6 +77,13 @@ public:
     bool cd(std::string name);
     std::vector<std::string> ls();
     std::string cat(std::string name);
+    Directory* getRoot();
+    Directory* getCurrent();
+
+    /**
+     * FileSystem dtor.
+     */
+    ~FileSystem();
 };
 
 

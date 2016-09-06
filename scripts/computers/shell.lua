@@ -2,7 +2,7 @@ function main()
     info()
     if checkAccess() then
         repeat
-            io.write(GetName() .. ":" .. GetDir() .. "$ ")
+            io.write(GetName() .. ":" .. FileSystem.pwd() .. "$ ")
             io.flush()
             local line = io.read()
 
@@ -48,6 +48,17 @@ function execute(line)
         local prog = io.read()
         if not Run(prog) then
             print("Program not found: " .. prog)
+        end
+    elseif line == "pwd" then
+        print(FileSystem.pwd())
+    elseif line == "ls" then
+        print(FileSystem.ls())
+    elseif line == "cd" then
+        io.write("Target: ")
+        io.flush()
+        local target = io.read()
+        if not FileSystem.cd(target) then
+            print("Directory not found: " .. target)
         end
     else
         print("Command not found: " .. line)
