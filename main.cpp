@@ -7,7 +7,7 @@ int main() {
     Network *network = new Network(5);
 
     // initialize localhost
-    Computer* localhost = new Computer("localhost", "shell");
+    Computer* localhost = new Computer("localhost", "ssh");
     network->addComputer(localhost);
 
     // connect to localhost

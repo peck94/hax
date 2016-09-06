@@ -1,12 +1,22 @@
 function main()
     info()
-    repeat
-        io.write("$ ")
-        io.flush()
-        local line = io.read()
+    if checkAccess() then
+        repeat
+            io.write("$ ")
+            io.flush()
+            local line = io.read()
 
-        execute(line)
-    until line == "logout"
+            execute(line)
+        until line == "logout"
+    else
+        print("Access denied.")
+    end
+
+    print("Connection closed by remote host.")
+end
+
+function checkAccess()
+    return true
 end
 
 function execute(line)
