@@ -1,7 +1,3 @@
-//
-// Created by pecky on 9/6/16.
-//
-
 #include "FileSystem.h"
 using namespace std;
 

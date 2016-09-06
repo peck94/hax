@@ -42,6 +42,11 @@ private:
      */
     FileSystem* fs;
 
+    /*
+     * Initialize new Lua state.
+     */
+    void initState(sel::State state);
+
 public:
     /**
      * Computer ctors.

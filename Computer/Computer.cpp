@@ -1,3 +1,4 @@
+#include <fstream>
 #include "Computer.h"
 using namespace sel;
 using namespace std;
@@ -51,13 +52,26 @@ void Computer::initialize() {
         }
     };
     state["Run"] = [this](string name) {
-        State newState{true};
-        newState.Load(name.c_str());
+        string path = "scripts/tools/" + name + ".lua";
+        ifstream file(path);
+        if(!file.is_open()) {
+            return false;
+        }
+
+        string contents;
+        while(!file.eof()) {
+            string line;
+            getline(file, line);
+            contents += line;
+        }
+        file.close();
+
+        state(contents.c_str());
+        return true;
     };
 
     // register variables
     state["FileSystem"].SetObj(*fs,
-                               "getRoot", &FileSystem::getRoot,
                                "cd", &FileSystem::cd,
                                "ls", &FileSystem::ls,
                                "pwd", &FileSystem::pwd,
