@@ -49,7 +49,7 @@ std::vector<std::string> Config::loadFile(std::string name) {
 
 std::vector<std::string> Config::getScripts() {
     return vector<string>{
-            "shell", "ssh"
+            "ssh"
     };
 }
 

@@ -18,58 +18,51 @@ function checkAccess()
 end
 
 function execute(line)
-    if line == "logout" then return
-    elseif line == "help" then
+    local sep = string.find(line, " ")
+    local cmd = line
+    local arg = ""
+    if sep ~= nil then
+        cmd = string.sub(line, 1, sep-1)
+        arg = string.sub(line, sep+1)
+    end
+
+    if cmd == "logout" then return
+    elseif cmd == "help" then
         print("Available commands:")
         print("help: this text")
         print("logout: disconnect from this system")
         print("info: display information about this system")
         print("ping: check whether a host is live")
         print("connect: connect to a remote host")
-    elseif line == "info" then info()
-    elseif line == "ping" then
-        io.write("Host: ")
-        io.flush()
-        local host = io.read()
-        if Ping(host) == true then
+    elseif cmd == "info" then info()
+    elseif cmd == "ping" then
+        if Ping(arg) == true then
             print("Host is alive.")
         else
             print("Host is not responding.")
         end
-    elseif line == "connect" then
-        io.write("Host: ")
-        io.flush()
-        local host = io.read()
-        if not Connect(host) then
+    elseif cmd == "connect" then
+        if not Connect(arg) then
             print("Cannot connect to host.")
         else
             print("Connection closed by remote host.")
         end
-    elseif line == "run" then
-        io.write("program: ")
-        io.flush()
-        local prog = io.read()
-        if not Run(prog) then
-            print("Program not found: " .. prog)
+    elseif cmd == "run" then
+        if not Run(arg) then
+            print("Program not found: " .. arg)
         end
-    elseif line == "pwd" then
+    elseif cmd == "pwd" then
         print(FileSystem.pwd())
-    elseif line == "ls" then
+    elseif cmd == "ls" then
         print(FileSystem.ls())
-    elseif line == "cd" then
-        io.write("Target: ")
-        io.flush()
-        local target = io.read()
-        if not FileSystem.cd(target) then
-            print("Directory not found: " .. target)
+    elseif cmd == "cd" then
+        if not FileSystem.cd(arg) then
+            print("Directory not found: " .. arg)
         end
-    elseif line == "cat" then
-        io.write("File: ")
-        io.flush()
-        local target = io.read()
-        print(FileSystem.cat(target))
+    elseif cmd == "cat" then
+        print(FileSystem.cat(arg))
     else
-        print("Command not found: " .. line)
+        print("Command not found: " .. cmd)
     end
 end
 

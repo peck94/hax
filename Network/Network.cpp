@@ -10,7 +10,7 @@ Network::Network(int size) {
     vector<string> scripts = Config::get().getScripts();
     uniform_int_distribution<unsigned long> dist2(0, scripts.size()-1);
 
-    uniform_int_distribution<int> dist3(0, Config::get().getMaxUsers());
+    uniform_int_distribution<int> dist3(1, Config::get().getMaxUsers());
 
     mt19937_64 engine = Config::get().getEngine();
     string prev;
