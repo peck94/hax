@@ -2,7 +2,7 @@ function main()
     info()
     if checkAccess() then
         repeat
-            io.write("$ ")
+            io.write(GetName() .. ":" .. GetDir() .. "$ ")
             io.flush()
             local line = io.read()
 
@@ -20,7 +20,7 @@ function checkAccess()
 end
 
 function execute(line)
-    if line == "exit" or line == "logout" then return
+    if line == "logout" then return
     elseif line == "help" then
         print("Available commands:")
         print("help: this text")
@@ -30,7 +30,7 @@ function execute(line)
         print("connect: connect to a remote host")
     elseif line == "info" then info()
     elseif line == "ping" then
-        io.write("host: ")
+        io.write("Host: ")
         io.flush()
         local host = io.read()
         if Ping(host) == true then
@@ -39,25 +39,15 @@ function execute(line)
             print("Host is not responding.")
         end
     elseif line == "connect" then
-        io.write("host: ")
+        io.write("Host: ")
         io.flush()
         local host = io.read()
-    elseif line == "finger" then
-        print(ListUsers())
-        if not Connect(host) then
-            print("Cannot connect to remote host.")
-        end
-    elseif line == "rpc" then
-        io.write("host: ")
+    elseif line == "run" then
+        io.write("program: ")
         io.flush()
-        local host = io.read()
-        io.write("command: ")
-        io.flush()
-        local cmd = io.read()
-        if RPC(host, cmd) then
-            print("The command completed successfully.")
-        else
-            print("Cannot connect to remote host.")
+        local prog = io.read()
+        if not Run(prog) then
+            print("Program not found: " .. prog)
         end
     else
         print("Command not found: " .. line)

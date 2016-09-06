@@ -48,6 +48,9 @@ void Computer::initialize() {
             return false;
         }
     };
+    state["Run"] = [this](string name) {
+
+    };
 
     // execute script
     state["main"]();
