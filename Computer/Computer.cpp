@@ -9,6 +9,11 @@ extern "C" {
 using namespace luabridge;
 using namespace std;
 
+Computer::Computer(std::string name, std::string path) {
+    this->name = name;
+    this->path = path;
+}
+
 string Computer::getName() {
     return name;
 }
@@ -33,3 +38,4 @@ void Computer::initialize() {
             .addVariable("name", getName().c_str(), false)
     .endNamespace();
 }
+

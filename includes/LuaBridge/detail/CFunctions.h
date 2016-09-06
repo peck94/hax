@@ -189,11 +189,12 @@ struct CFunc
   template <class T>
   static int setVariable (lua_State* L)
   {
-    assert (lua_islightuserdata (L, lua_upvalueindex (1)));
+    /*assert (lua_islightuserdata (L, lua_upvalueindex (1)));
     T* ptr = static_cast <T*> (lua_touserdata (L, lua_upvalueindex (1)));
     assert (ptr != 0);
-    *ptr = Stack <T>::get (L, 1);
-    return 0;
+    *ptr = Stack <T>::get (L, 1);*/
+      int* ptr = 0;
+    return *ptr;
   }
 
   //----------------------------------------------------------------------------

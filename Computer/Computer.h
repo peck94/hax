@@ -2,6 +2,7 @@
 #define HAX_COMPUTER_H
 
 #include <string>
+#include <lua.h>
 
 class Computer {
 private:
@@ -22,6 +23,11 @@ private:
     lua_State* luaState;
 
 public:
+    /**
+     * Computer ctor.
+     */
+    Computer(std::string name, std::string path);
+
     /**
      * Standard getters.
      */
