@@ -4,16 +4,17 @@
 #include <string>
 #include <vector>
 #include <random>
+#include <map>
 
 class Config {
 private:
     Config() = default;
 
     /*
-     * Store wordlist.
-     * This wordlist is used for all kinds of purposes, such as generating computer names.
+     * Store wordlists.
+     * These wordlists are used for all kinds of purposes, such as generating computer names.
      */
-    std::vector<std::string> words;
+    std::map<std::string, std::vector<std::string>> wordlists;
 
     /**
      * Lazily load a file.
@@ -38,6 +39,7 @@ public:
     std::vector<std::string> getScripts();
     int getMaxUsers();
     std::mt19937_64 getEngine();
+    std::pair<std::string, std::string> getRandomFile();
 };
 
 
